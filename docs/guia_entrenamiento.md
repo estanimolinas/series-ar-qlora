@@ -147,6 +147,33 @@ evaluaciones, pero también significa que no hay evidencia de que sean los mejor
 - **`trl` y `bitsandbytes`:** no se imprimen en ningún registro. Se fijaron (`trl` 1.15.0, `bitsandbytes` 0.50.2, `peft` 0.21.2, `accelerate` 1.15.0, `datasets` 4.8.5)
   con las versiones que instala hoy `unsloth==2026.11.3`, no con las de la sesión original, así que pueden diferir levemente.
 
+### Verificar el entorno fijado en Colab (prueba de 10 pasos)
+
+Comprueba dos cosas que no se pudieron probar fuera de Colab: que `requirements-colab.txt` instala un entorno que
+entrena, y que el camino de GPU de `entrenar()` corre de punta a punta. No reentrena el adaptador completo. Runtime: GPU T4.
+
+```python
+from google.colab import drive
+drive.mount("/content/drive")
+```
+```bash
+git clone https://github.com/estanimolinas/series-ar-qlora
+cd series-ar-qlora
+pip install -q -r requirements-colab.txt
+pip freeze | grep -iE "^(unsloth|transformers|trl|bitsandbytes|peft|accelerate|datasets|torch|triton)=="
+python scripts/entrenar.py --datos /content/drive/MyDrive/qlora-series-ar/data --modo prueba_10_pasos
+```
+
+Qué se espera (referencia, no una prueba exacta: la GPU no es determinista bit a bit):
+- La línea `Entrenamiento: 1586 | control: 119` y que termine sin errores.
+- La pérdida de entrenamiento en el paso 10 cerca de la publicada (1,0967).
+- Duración estimada de 10 a 15 minutos (10 de los 100 pasos de la corrida de 75 minutos, más la carga del modelo).
+- Las versiones que imprime `pip freeze` coinciden con las de `requirements-colab.txt`. Si Colab cambió `torch` o `triton`, anotarlo.
+
+Reentrenar los 100 pasos no es necesario para publicar. Si se hiciera, el adaptador resultante es un modelo nuevo: se
+evalúa en validación y no en test, que ya se usó una vez por modelo. Los resultados publicados corresponden al adaptador
+original.
+
 ## 9. Preguntas que pueden hacer
 
 **¿Por qué QLoRA y no ajustar todo el modelo?** Porque no entra en una T4. Con QLoRA se entrena el 0,81 % de los

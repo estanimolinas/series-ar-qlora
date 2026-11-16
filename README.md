@@ -89,7 +89,7 @@ Validación (n = 299): 35,5 % contra 65,6 % _(verificado contra la salida de los
 
 - **Una sola semilla de entrenamiento y una sola corrida por modelo.** No hay estimación de la variación entre semillas.
 - **Comparación asimétrica:** el modelo base recibe un prompt de sistema diseñado con ejemplos de train; el ajustado, ninguno. Sigue pendiente el control con un prompt más fuerte y con un modelo mayor como agente.
-- **El evaluador mira solo la última consulta a `get_series`** para decidir si la serie es la correcta; un agente que consulta varias series y responde con una anterior puede ser mal puntuado.
+- **El evaluador mira solo la última consulta a `get_series`** para decidir si la serie es la correcta; un agente que consulta varias series y responde con una anterior podría ser mal puntuado. Se midió el efecto repuntuando los episodios ya guardados de test con una variante que acepta cualquier consulta (`scripts/sensibilidad_evaluador.py`): no cambia ningún resultado (28,4 % y 72,8 %). Solo 24 episodios del modelo base consultaron más de una serie y ninguno se recupera; el modelo ajustado consulta siempre una. La variante supone que un valor y una fecha correctos salieron de la serie objetivo. La métrica principal no se modificó.
 - **Preguntas generadas con un LLM** (Claude Haiku 5.5) y verificadas con otro paso del mismo modelo; no hay revisión humana exhaustiva. Las preguntas coloquiales no se evaluaron sobre test.
 - **Datos acotados a un recorte del catálogo** (series con datos usables y particionadas por familias de datasets); no es una evaluación sobre todo el portal.
 - Se excluyen de la evaluación las variaciones interanuales sobre tasas (ambiguas entre puntos porcentuales y porcentaje).
@@ -101,8 +101,8 @@ src/series_qlora/   texto · herramientas (buscador FTS5 + caché de API) · eva
                     particion (familias de datasets) · esquema · trayectorias · entrenamiento · graficos
                     cache_api · especificaciones · preguntas (construcción y filtrado de las preguntas) · graficos_animados
 scripts/            evaluar.py (requiere GPU) · particionar.py · construir_trayectorias.py · entrenar.py
-                    preparar_preguntas.py (pasos 2 y 3 llaman a la API de Anthropic, con costo) · figuras_animadas.py
-tests/              126 tests con datos sintéticos (sin GPU, sin red)
+                    preparar_preguntas.py (pasos 2 y 3 llaman a la API de Anthropic, con costo) · figuras_animadas.py · sensibilidad_evaluador.py
+tests/              128 tests con datos sintéticos (sin GPU, sin red)
 docs/               guía de métricas, guía de entrenamiento, decisiones, errores corregidos, uso de la API de Anthropic, datos y licencias, hoja de ruta
 figures/            figuras del resultado (PNG y PDF) y sus pies
 notebooks/          notebooks de Colab 00 a 09 (sin salidas), con su celda inicial; ver notebooks/README.md

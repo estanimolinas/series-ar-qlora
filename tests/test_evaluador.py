@@ -83,3 +83,33 @@ def test_wilson_contiene_la_proporcion_y_se_achica_con_n():
     lo2, hi2 = wilson(500, 1000)
     assert (hi2 - lo2) < (hi - lo)
     assert 0 <= wilson(0, 10)[0] and wilson(10, 10)[1] <= 1
+
+
+# ---------- variante para análisis de sensibilidad ----------
+def _msgs(*ids):
+    llamadas = [("search_series", {"query": "x"})] + [("get_series", {"ids": i}) for i in ids]
+    return [{"role": "assistant", "tool_calls": [{"function": {"name": n, "arguments": a}}]} for n, a in llamadas] + \
+           [{"role": "tool", "content": "{}"}]
+
+
+def test_ids_consultados_toma_solo_get_series_en_orden():
+    from series_qlora.evaluador import ids_consultados
+    assert ids_consultados(_msgs("a", "b", "a")) == ["a", "b", "a"]
+    assert ids_consultados([{"role": "user", "content": "hola"}, {"role": "assistant", "content": "ok"}]) == []
+
+
+def test_variante_acepta_la_serie_objetivo_consultada_antes_pero_no_corrige_valor_ni_fecha():
+    from series_qlora.evaluador import puntuar_alguna_serie
+    gold = {"valor": 10.0, "fecha": "2020-01-01"}
+    base = puntuar("ultimo_dato", "mensual", gold, {"valor": 10.0, "fecha": "2020-01-01"}, "otra", "objetivo")
+    assert base["correcta"] is False and base["serie_ok"] is False        # métrica principal: última consulta
+    alt = puntuar_alguna_serie(base, ["objetivo", "otra"], "objetivo")
+    assert alt == {"serie_ok_alguna": True, "correcta_alguna": True}
+    # si la objetivo nunca se consultó, sigue incorrecta
+    assert puntuar_alguna_serie(base, ["otra"], "objetivo")["correcta_alguna"] is False
+    # con la serie bien consultada pero valor equivocado, la variante tampoco lo salva
+    mal = puntuar("ultimo_dato", "mensual", gold, {"valor": 99.0, "fecha": "2020-01-01"}, "otra", "objetivo")
+    assert puntuar_alguna_serie(mal, ["objetivo"], "objetivo")["correcta_alguna"] is False
+    # si no terminó con submit_answer, tampoco
+    sin = puntuar("ultimo_dato", "mensual", gold, None, "objetivo", "objetivo")
+    assert puntuar_alguna_serie(sin, ["objetivo"], "objetivo")["correcta_alguna"] is False

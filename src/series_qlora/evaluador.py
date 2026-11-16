@@ -75,3 +75,28 @@ def wilson(k, n, z=1.96):
     centro = (p + z * z / (2 * n)) / (1 + z * z / n)
     mitad = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
     return max(0.0, float(centro - mitad)), min(1.0, float(centro + mitad))   # recorte: error de redondeo en k=0 o k=n
+
+
+def ids_consultados(mensajes) -> list[str]:
+    """Series que el agente pidió con get_series, en orden (a partir de los mensajes del episodio)."""
+    ids = []
+    for m in mensajes:
+        if m.get("role") != "assistant":
+            continue
+        for t in m.get("tool_calls") or []:
+            if t["function"]["name"] == "get_series":
+                ids.append(str(t["function"]["arguments"].get("ids")))
+    return ids
+
+
+def puntuar_alguna_serie(r: dict, ids: list[str], objetivo: str) -> dict:
+    """Variante para análisis de sensibilidad: la serie cuenta como correcta si la objetivo está entre TODAS las consultadas.
+
+    La métrica principal (`puntuar`) mira solo la última consulta a get_series. Esta variante no penaliza a un agente
+    que consultó varias series y respondió con una anterior. Supone que, si el valor y la fecha coinciden con el dato
+    esperado, la respuesta salió de la serie objetivo: no puede comprobar de cuál de las consultadas salió.
+    `r` es el resultado ya puntuado (con termino, valor_ok y fecha_ok).
+    """
+    alguna = objetivo in ids
+    return {"serie_ok_alguna": alguna,
+            "correcta_alguna": bool(r["termino"] and alguna and r["valor_ok"] and r["fecha_ok"])}
