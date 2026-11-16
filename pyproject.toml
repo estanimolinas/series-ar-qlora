@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "series-qlora"
+version = "0.1.0"
+description = "Agente de consulta de series de tiempo de datos.gob.ar: QLoRA sobre Qwen3-4B con evaluación propia"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2,<3",   # los resultados se produjeron con pandas 2.x
+    "numpy>=2.0,<2.3",
+    "requests>=2.32",
+    "matplotlib>=3.8",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.9",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/series_qlora"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+extend-exclude = ["notebooks", "_originales"]
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501", "B905"]   # prompts y mensajes en español: el largo de línea no se fuerza

@@ -1,0 +1,41 @@
+# Datos y artefactos pesados (viven en Drive / Hugging Face, no en git)
+data/*
+!data/.gitkeep
+!data/README.md
+# Resultados por pregunta: contienen preguntas generadas con un modelo de terceros; no se publican hasta decidir licencia y términos
+results/*.csv
+results/*.jsonl
+*.db
+*.sqlite
+*.safetensors
+*.bin
+*.gguf
+qlora_*/
+checkpoint-*/
+
+# Secretos
+.env
+.env.*
+secrets.*
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Notebooks: nunca con outputs
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+
+# Notebooks originales de Colab (con salidas; solo referencia local)
+_originales/
+drive-download-*/

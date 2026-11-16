@@ -1,0 +1,44 @@
+Salida de la celda de comparación en test (notebook 09, celda 1), pegada tal cual. Corrida del 15-nov-2026.
+
+Preguntas comparadas: 585 | familias: 23
+  Base + prompt optimizado: 166/585 = 28.4% (IC 95% de Wilson: 25% a 32%)
+  Entrenado, sin prompt: 426/585 = 72.8% (IC 95% de Wilson: 69% a 76%)
+
+Emparejado: ambas 142 | solo el entrenado 284 | solo la base 24 | ninguna 135
+Prueba exacta sobre las 308 donde difieren: p = 1.4e-57 (optimista: no considera las familias)
+
+Diferencia (entrenado - base): +44.4 puntos | IC 95% agrupado por familias (bootstrap, 23 familias): +37.2 a +51.9
+Familias donde el entrenado NO supera a la base: 0 de 23
+
+Por tipo (% correcta):
+                        n  base  entrenado  diferencia
+tipo_base                                             
+sin_datos             164  12.0       77.0        65.0
+ultimo_dato           147  28.0       74.0        46.0
+valor_puntual         146  49.0       70.0        21.0
+variacion_interanual  128  27.0       69.0        42.0
+
+Causas de fallo:
+                       base  entrenado
+convencion_porcentaje     1          0
+correcta                166        426
+fecha_equivocada         12          0
+no_termino              245          2
+serie_equivocada         68        147
+valor_equivocado         93         10
+
+Otras métricas:
+  base: terminó 58% | serie correcta 76% | acepta fracción 29% | pasos 3.2 | segundos por pregunta 10.2
+  entrenado: terminó 100% | serie correcta 75% | acepta fracción 73% | pasos 3.0 | segundos por pregunta 8.5
+
+Selección de serie (último search_series de cada episodio):
+
+  Base + prompt optimizado (n = 585)
+    la serie correcta estaba entre los candidatos: 92%
+    cuando estaba, eligió la correcta: 83% | eligió el candidato 1: 45%
+    caso difícil (la correcta NO es el candidato 1, n = 306): eligió la correcta 75% | eligió el candidato 1 10%
+
+  Entrenado, sin prompt (n = 585)
+    la serie correcta estaba entre los candidatos: 90%
+    cuando estaba, eligió la correcta: 83% | eligió el candidato 1: 44%
+    caso difícil (la correcta NO es el candidato 1, n = 310): eligió la correcta 76% | eligió el candidato 1 12%

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 450" width="960" height="450" role="img" aria-labelledby="t d" xmlns:c2pa="http://c2pa.org/manifest">
+<title id="t">Ciclo del agente: pregunta, búsqueda, consulta de datos y respuesta evaluada</title>
+<desc id="d">La pregunta llega al agente (Qwen3-4B con LoRA), que llama a search_series (índice FTS5), luego a get_series (caché y API de datos.gob.ar) y termina con submit_answer. Un evaluador por código revisa si terminó, la serie, el valor y la fecha.</desc>
+<style>
+:root{--fondo:#ffffff;--tarjeta:#f6f8fa;--borde:#c9d1d9;--texto:#1f2328;--suave:#59636e;--acento:#7C4DA0;--ok:#2E8B57}
+@media (prefers-color-scheme: dark){:root{--fondo:#0d1117;--tarjeta:#161b22;--borde:#3d444d;--texto:#e6edf3;--suave:#9198a1;--acento:#b48ad6;--ok:#4cc38a}}
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;fill:var(--texto)}
+.tit{font-size:15px;font-weight:600} .sub{font-size:12px;fill:var(--suave)} .det{font-size:13px}
+.card{fill:var(--tarjeta)} .flecha{stroke:var(--borde);stroke-width:2;fill:none}
+.ret{stroke:var(--suave);stroke-width:1.5;fill:none;stroke-dasharray:5 5}
+@keyframes on_a{0%,0.00%{opacity:.0}2.14%,15.71%{opacity:1}18.57%,100%{opacity:.0}}
+.da{opacity:0;animation:on_a 14.0s infinite}
+@keyframes hl_a{0%,0.00%{stroke:var(--borde);stroke-width:1.5}2.14%,15.71%{stroke:var(--acento);stroke-width:3}18.57%,100%{stroke:var(--borde);stroke-width:1.5}}
+.na{animation:hl_a 14.0s infinite}
+@keyframes on_b{0%,15.64%{opacity:.0}17.86%,31.43%{opacity:1}34.29%,100%{opacity:.0}}
+.db{opacity:0;animation:on_b 14.0s infinite}
+@keyframes hl_b{0%,15.64%{stroke:var(--borde);stroke-width:1.5}17.86%,31.43%{stroke:var(--acento);stroke-width:3}34.29%,100%{stroke:var(--borde);stroke-width:1.5}}
+.nb{animation:hl_b 14.0s infinite}
+@keyframes on_c{0%,31.36%{opacity:.0}33.57%,50.00%{opacity:1}52.86%,100%{opacity:.0}}
+.dc{opacity:0;animation:on_c 14.0s infinite}
+@keyframes hl_c{0%,31.36%{stroke:var(--borde);stroke-width:1.5}33.57%,50.00%{stroke:var(--acento);stroke-width:3}52.86%,100%{stroke:var(--borde);stroke-width:1.5}}
+.nc{animation:hl_c 14.0s infinite}
+@keyframes on_d{0%,49.93%{opacity:.0}52.14%,68.57%{opacity:1}71.43%,100%{opacity:.0}}
+.dd{opacity:0;animation:on_d 14.0s infinite}
+@keyframes hl_d{0%,49.93%{stroke:var(--borde);stroke-width:1.5}52.14%,68.57%{stroke:var(--acento);stroke-width:3}71.43%,100%{stroke:var(--borde);stroke-width:1.5}}
+.nd{animation:hl_d 14.0s infinite}
+@keyframes on_e{0%,68.50%{opacity:.0}70.71%,88.57%{opacity:1}91.43%,100%{opacity:.0}}
+.de{opacity:0;animation:on_e 14.0s infinite}
+@keyframes hl_e{0%,68.50%{stroke:var(--borde);stroke-width:1.5}70.71%,88.57%{stroke:var(--acento);stroke-width:3}91.43%,100%{stroke:var(--borde);stroke-width:1.5}}
+.ne{animation:hl_e 14.0s infinite}
+@media (prefers-reduced-motion: reduce){.da,.db,.dc,.dd,.de{animation:none;opacity:1} .na,.nb,.nc,.nd,.ne{animation:none}}
+</style>
+<rect width="960" height="450" fill="var(--fondo)"/>
+<text x="40" y="38" class="tit" style="font-size:18px">Cómo responde el agente</text>
+<text x="40" y="58" class="sub">Hasta 6 pasos por pregunta · cada resultado de herramienta vuelve al agente</text>
+
+<path class="flecha" d="M184,189.0 H219"/><path d="M219,184.0 l7,5 l-7,5" class="flecha"/>
+<path class="flecha" d="M369,189.0 H404"/><path d="M404,184.0 l7,5 l-7,5" class="flecha"/>
+<path class="flecha" d="M554,189.0 H589"/><path d="M589,184.0 l7,5 l-7,5" class="flecha"/>
+<path class="flecha" d="M739,189.0 H774"/><path d="M774,184.0 l7,5 l-7,5" class="flecha"/>
+<path class="ret" d="M665.0,150 C665.0,116 295.0,116 295.0,146"/>
+<path class="ret" d="M480.0,150 C480.0,128 315.0,128 315.0,146"/>
+<text x="480.0" y="110" class="sub" text-anchor="middle">el resultado vuelve al agente</text>
+<rect class="card na" x="40" y="150" width="140" height="78" rx="10" stroke="var(--borde)"/>
+<text x="110.0" y="184" class="tit" text-anchor="middle">Pregunta</text>
+<text x="110.0" y="206" class="sub" text-anchor="middle">lenguaje natural</text>
+<g class="da"><rect x="13" y="250" width="194" height="82" rx="8" class="card" stroke="var(--acento)" stroke-width="1"/>
+<text x="110.0" y="272" class="det" text-anchor="middle" style="font-size:12px">«¿Cuál fue la variación interanual</text>
+<text x="110.0" y="292" class="det" text-anchor="middle" style="font-size:13px">del IPC en marzo de 2024?»</text>
+<text x="110.0" y="312" class="det" text-anchor="middle" style="font-size:13px">(ejemplo ilustrativo)</text>
+</g>
+<rect class="card nb" x="225" y="150" width="140" height="78" rx="10" stroke="var(--borde)"/>
+<text x="295.0" y="184" class="tit" text-anchor="middle">Agente</text>
+<text x="295.0" y="206" class="sub" text-anchor="middle">Qwen3-4B + LoRA</text>
+<g class="db"><rect x="198" y="250" width="194" height="82" rx="8" class="card" stroke="var(--acento)" stroke-width="1"/>
+<text x="295.0" y="272" class="det" text-anchor="middle" style="font-size:13px">Decide qué herramienta</text>
+<text x="295.0" y="292" class="det" text-anchor="middle" style="font-size:13px">llamar en cada turno</text>
+<text x="295.0" y="312" class="det" text-anchor="middle" style="font-size:12px">(decodificación determinista)</text>
+</g>
+<rect class="card nc" x="410" y="150" width="140" height="78" rx="10" stroke="var(--borde)"/>
+<text x="480.0" y="184" class="tit" text-anchor="middle">search_series</text>
+<text x="480.0" y="206" class="sub" text-anchor="middle">buscador</text>
+<g class="dc"><rect x="383" y="250" width="194" height="82" rx="8" class="card" stroke="var(--acento)" stroke-width="1"/>
+<text x="480.0" y="272" class="det" text-anchor="middle" style="font-size:13px">Consulta con palabras clave</text>
+<text x="480.0" y="292" class="det" text-anchor="middle" style="font-size:13px">→ top 10 del catálogo</text>
+<text x="480.0" y="312" class="det" text-anchor="middle" style="font-size:13px">SQLite FTS5 · bm25</text>
+</g>
+<rect class="card nd" x="595" y="150" width="140" height="78" rx="10" stroke="var(--borde)"/>
+<text x="665.0" y="184" class="tit" text-anchor="middle">get_series</text>
+<text x="665.0" y="206" class="sub" text-anchor="middle">datos</text>
+<g class="dd"><rect x="568" y="250" width="194" height="82" rx="8" class="card" stroke="var(--acento)" stroke-width="1"/>
+<text x="665.0" y="272" class="det" text-anchor="middle" style="font-size:13px">Serie, fechas y modo</text>
+<text x="665.0" y="292" class="det" text-anchor="middle" style="font-size:13px">→ caché SQLite → API</text>
+<text x="665.0" y="312" class="det" text-anchor="middle" style="font-size:13px">(datos.gob.ar)</text>
+</g>
+<rect class="card ne" x="780" y="150" width="140" height="78" rx="10" stroke="var(--borde)"/>
+<text x="850.0" y="184" class="tit" text-anchor="middle">submit_answer</text>
+<text x="850.0" y="206" class="sub" text-anchor="middle">respuesta final</text>
+<g class="de"><rect x="753" y="250" width="194" height="82" rx="8" class="card" stroke="var(--acento)" stroke-width="1"/>
+<text x="850.0" y="272" class="det" text-anchor="middle" style="font-size:13px">Evaluador: ¿terminó? ¿serie?</text>
+<text x="850.0" y="292" class="det" text-anchor="middle" style="font-size:13px">¿valor? ¿fecha?</text>
+<text x="850.0" y="312" class="det" text-anchor="middle" style="font-size:13px">(código, sin modelo)</text>
+</g>
+<circle r="5" cy="217" fill="var(--acento)" stroke="var(--fondo)" stroke-width="2"><animate attributeName="cx" dur="14.0s" repeatCount="indefinite" values="110;110;295;295;480;480;665;665;850;850;850;850" keyTimes="0.0000;0.1000;0.1929;0.3000;0.3500;0.4857;0.5357;0.6714;0.7214;0.8714;0.9000;1.0000"/></circle>
+<text x="40" y="424" class="sub">Qwen3-4B en 4 bits con adaptadores LoRA (QLoRA) · herramientas y evaluador en código · ejemplo ilustrativo, no un resultado medido</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYToxOWU4MjIyYy05MWRmLTQ5ZTUtODA5MC1lNDUyM2ExZmY4YTcAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaFAJf+JiN0AucdZih5OMS7UAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDplMmQ3YmViZi1lNDk2LTQxMzEtODZiYS02ODc3OTBjZDVkZThscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNotnW4RFv64pk4BW4cr3sPfQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggrHpnTPAt/Vy5+OW333SQwXI5XGvgslRscw+7bg0xV7WkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaK1eduNl3t8MkFmOR21EdH0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIA7fg3oLJHg/kwd0D427CiDGXG0JImr2aaABLzss+FTIZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GR6hZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjE5ZTgyMjJjLTkxZGYtNDllNS04MDkwLWU0NTIzYTFmZjhhNy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjY3YzhhNmEyLTViZjQtNGZhMi05MGE4LTM5NWMxZDBhMmZjNXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCsemdM8C39XLn45bffdJDBcjlca+CyVGxzD7tuDTFXtaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg3L2fD9w9b2HfCouAcmaUjChGefCxNGjLl2A9zymcvkCiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggKB1578KPnlGChRH+S9VYeWT7fZuLmm8dokz5fQG2zhR0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQPB+I0ap68nEIFoXvpTcl9IE3pJ8mBNqJM9NeFv+tI8w5kmWrqezOZLf9lsyU4UBCbKTGnLQN9vGF4OC4Wm5X5w=</c2pa:manifest></metadata></svg>

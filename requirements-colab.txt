@@ -1,0 +1,16 @@
+# Solo para entrenar y evaluar con GPU en Colab (T4), donde se usa pip. En local el entorno se maneja con uv (pyproject.toml).
+pandas==2.3.3
+numpy==2.2.6
+requests==2.34.2
+unsloth==2026.11.3      # versión que se usó en el entrenamiento
+langfuse==5.2.0         # SDK usado para las trazas
+transformers==5.17.0    # versión impresa en los registros de entrenamiento y evaluación
+# Los registros también muestran torch 2.14.1+cu130, triton 3.8.0 y CUDA 13.0 (los trae el entorno de Colab, no se fijan acá).
+# En el registro de la evaluación en test figura unsloth 2026.11.4; el entrenamiento usó 2026.11.3.
+# trl, bitsandbytes y afines: versiones leídas el 16-nov-2026 en una sesión nueva de Colab (T4) con unsloth==2026.11.3.
+# No vienen del registro del entrenamiento (que no las imprime), así que pueden diferir levemente de las de aquella corrida.
+trl==1.15.0
+bitsandbytes==0.50.2
+peft==0.21.2
+accelerate==1.15.0
+datasets==4.8.5
