@@ -6,8 +6,14 @@ Agente que responde preguntas en lenguaje natural sobre series de tiempo oficial
 (Qwen3-4B-Instruct, cuantizado a 4 bits) y lo compara contra el mismo modelo sin ajustar, con un
 evaluador propio y una partición de datos que evita fuga entre entrenamiento y prueba.
 
-> **Estado:** en preparación. Las secciones marcadas como _pendiente_ se completan cuando se
-> regeneran las tablas y figuras desde los resultados reales (`results/`, `figures/`).
+![CI](https://github.com/estanimolinas/series-ar-qlora/actions/workflows/ci.yml/badge.svg)
+
+> **Estado:** versión 0.1. Los resultados son los medidos en test (una corrida por modelo, una semilla de
+> entrenamiento) y las limitaciones están declaradas más abajo. Los pasos de datos (partición por familias,
+> trayectorias, separación de control) se reproducen sin GPU ni API; el entrenamiento y la evaluación
+> requieren una GPU T4 (Colab). No se publican los datos, las preguntas generadas ni el adaptador (ver
+> [Datos, licencias y uso de modelos de terceros](#datos-licencias-y-uso-de-modelos-de-terceros)).
+> El trabajo pendiente está en [`docs/hoja_de_ruta.md`](docs/hoja_de_ruta.md).
 
 ![Ciclo del agente: la pregunta llega al agente, que llama a search_series y get_series y termina con submit_answer; un evaluador por código revisa el resultado](figures/agente_animado.svg)
 
