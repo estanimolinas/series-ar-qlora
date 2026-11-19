@@ -2,7 +2,7 @@
 
 Agente que responde preguntas en lenguaje natural sobre series de tiempo oficiales de Argentina
 ([API de Series de Tiempo de datos.gob.ar](https://datos.gob.ar/series/api)) usando tres herramientas
-(`search_series`, `get_series`, `submit_answer`). El proyecto ajusta con **QLoRA** un modelo chico
+(`search_series`, `get_series`, `submit_answer`). El proyecto ajusta con **QLoRA** un LLM pequeño
 (Qwen3-4B-Instruct, cuantizado a 4 bits) y lo compara contra el mismo modelo sin ajustar, con un
 evaluador propio y una partición de datos que evita fuga entre entrenamiento y prueba.
 
